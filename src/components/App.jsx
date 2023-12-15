@@ -28,7 +28,7 @@ export const App = () => {
       alert('Contact has already added!');
       return;
     }
-    setContacts([...contacts, newContact]);
+    setContacts(contacts => [...contacts, newContact]);
   };
 
   const handleSetFilter = e => {
