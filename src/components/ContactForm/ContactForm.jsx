@@ -3,55 +3,54 @@ import {
   StyledForm,
   StyledInput,
   StyledLabel,
-} from './ContactForm.styled';
-import React from 'react';
+} from './ContactForm.styled.js';
+import { useState } from 'react';
+import { nanoid } from 'nanoid';
 
-export class ContactForm extends React.Component {
-  state = {
-    name: '',
-    number: '',
+export const ContactForm = ({ addContact }) => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
+  const handleInputName = e => {
+    setName(e.target.value);
   };
 
-  handleInputChange = e => {
-    const { name, value } = e.target;
-    console.log(e);
-    this.setState({ [name]: value });
+  const handleInputNumber = e => {
+    setNumber(e.target.value);
   };
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.onContactAdd(this.state.name, this.state.number);
-    this.setState({ name: '', number: '' });
+    const newContact = { name, number, id: nanoid() };
+    addContact(newContact);
+    setName('');
+    setNumber('');
   };
-
-  render() {
-    const { name, number } = this.state;
-    return (
-      <StyledForm onSubmit={this.handleSubmit}>
-        <StyledLabel>
-          {'Name'}
-          <StyledInput
-            name="name"
-            value={name}
-            type="text"
-            onChange={this.handleInputChange}
-            placeholder="name"
-            required
-          ></StyledInput>
-        </StyledLabel>
-        <StyledLabel>
-          {'Number'}
-          <StyledInput
-            name="number"
-            value={number}
-            type="tel"
-            onChange={this.handleInputChange}
-            placeholder="phone number"
-            required
-          ></StyledInput>
-        </StyledLabel>
-        <StyledBtn>Add contacts</StyledBtn>
-      </StyledForm>
-    );
-  }
-}
+  return (
+    <StyledForm onSubmit={handleSubmit}>
+      <StyledLabel>
+        {'Name'}
+        <StyledInput
+          name="name"
+          value={name}
+          type="text"
+          onChange={handleInputName}
+          placeholder="name"
+          required
+        ></StyledInput>
+      </StyledLabel>
+      <StyledLabel>
+        {'Number'}
+        <StyledInput
+          name="number"
+          value={number}
+          type="tel"
+          onChange={handleInputNumber}
+          placeholder="phone number"
+          required
+        ></StyledInput>
+      </StyledLabel>
+      <StyledBtn>Add contacts</StyledBtn>
+    </StyledForm>
+  );
+};

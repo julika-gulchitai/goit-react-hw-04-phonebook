@@ -17,9 +17,9 @@ export const StyledForm = styled.form`
   box-shadow: 2px 2px 7px 3px lightgray;
   width: 300px;
   padding: 20px 20px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
 `;
 
 export const StyledTitle = styled.h2`
@@ -57,11 +57,10 @@ export const StyledInput = styled.input`
   display: block;
   padding: 7px 10px;
   font-size: 10px;
-  width: 280px;
+  width: 230px;
   border: 0.5px solid;
-  border-radius: 20px
+  border-radius: 4px
   margin-bottom: 20px;
-  color: #86a8b5;
 `;
 export const StyledLabel = styled.label`
   font-size: 10px;
